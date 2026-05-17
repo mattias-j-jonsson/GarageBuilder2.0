@@ -193,6 +193,17 @@ namespace GarageBuilder
             return returnArray;            
         }
 
+        public void PrintType(string type)
+        {
+            for(int i = 0; i < VehicleCount; i++)
+            {
+                if (StorageSpace[i] != null && StorageSpace[i].GetType().Name.ToUpper() == type.ToUpper())
+                {
+                    Console.WriteLine(StorageSpace[i]);
+                }
+            }
+        }
+
         public override string ToString()
         {
             if(VehicleCount > 0)
