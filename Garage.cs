@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -195,13 +196,18 @@ namespace GarageBuilder
 
         public void PrintType(string type)
         {
+            int printedVehicles = 0;
+            StringBuilder sb = new StringBuilder();
             for(int i = 0; i < VehicleCount; i++)
             {
                 if (StorageSpace[i] != null && StorageSpace[i].GetType().Name.ToUpper() == type.ToUpper())
                 {
-                    Console.WriteLine(StorageSpace[i]);
+                    sb.Append(StorageSpace[i]);
+                    printedVehicles++;
                 }
             }
+            Console.WriteLine($"{printedVehicles} vehicles was found.");
+            Console.WriteLine(sb.ToString());
         }
 
         public override string ToString()

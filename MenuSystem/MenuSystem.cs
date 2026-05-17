@@ -142,6 +142,11 @@ namespace GarageBuilder
 
         }
 
+        public static string PrintTypeMenu()
+        {
+            return DrawChoiceMenu(["Airplane", "Boat", "Bus", "Car", "Motorcycle"], "Which vehicles do you want to print?");
+        }
+
         // For some use cases it is more helpful to use the index of chosen menu option, rather
         // than the string of said option. Therefore there are two versions of DrawChoiceMenu,
         // one which catches that index as an "out" int variable, and one that just returns 

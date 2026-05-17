@@ -27,11 +27,11 @@ namespace GarageBuilder
             bool running = true;
             while(running)
             {
-                string[] menuOptions = ["Add vehicle", "Remove vehicle", "Find vehicle", "Print garage inventory", "Quit"];
-                string menuChoice = MenuSystem.MainMenu(menuOptions).Split(" ")[0];
+                string[] menuOptions = ["Add vehicle", "Remove vehicle", "Find vehicle", "Print all vehicles", "Print type", "Quit"];
+                string menuChoice = MenuSystem.MainMenu(menuOptions);
                 switch (menuChoice)
                 {
-                    case "Add":
+                    case "Add vehicle":
                         if(garage.IsFull)
                         {
                             Console.WriteLine("The garage has reached its limit. Please remove vehicles to free up space");
@@ -52,7 +52,7 @@ namespace GarageBuilder
                             }
                         }
                         break;
-                    case "Remove":
+                    case "Remove vehicle":
                         if (garage.VehicleCount == 0)
                         {
                             Console.WriteLine("The garage is Empty.");
@@ -77,7 +77,7 @@ namespace GarageBuilder
                             // Console.Read();
                         }
                         break;
-                    case "Find":
+                    case "Find vehicle":
                         MenuSystem.FindVehicleMenu(out string type, out string id, out string colour, out int weight);
                         Vehicle[] foundVehicles = garage.FindVehicle(type, id, colour, weight);
                         if (foundVehicles.Length == 0)
@@ -94,8 +94,12 @@ namespace GarageBuilder
                         }
                         Console.Read();
                         break;
-                    case "Print":
+                    case "Print all vehicles":
                         Console.WriteLine(garage.ToString());
+                        Console.Read();
+                        break;
+                    case "Print type":
+                        garage.PrintType(MenuSystem.PrintTypeMenu());
                         Console.Read();
                         break;
                     case "Quit":
