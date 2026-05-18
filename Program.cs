@@ -10,7 +10,7 @@ namespace GarageBuilder
         static void Main()
         {
             int size = MenuSystem.PrelimenaryMenu();
-            Garage garage = new Garage(size);
+            var garage = new Garage<Vehicle>(size);
             bool loadedQuestion = MenuSystem.LoadFileMenu();
             if (loadedQuestion)
             {

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Diagnostics;
@@ -8,7 +9,7 @@ using GarageBuilder.Vehicles;
 
 namespace GarageBuilder
 {
-    internal class Garage
+    internal class Garage<T>:IEnumerable<T> where T : Vehicle
     {
         // fields
         // ====================================================================
@@ -51,7 +52,7 @@ namespace GarageBuilder
         // ====================================================================
         public Garage(int capacity)
         {
-            StorageSpace = new Vehicle[capacity];
+            StorageSpace = new T[capacity];
             this.Capacity = capacity;
         }
         // methods
@@ -246,6 +247,14 @@ namespace GarageBuilder
             {
                 return "Garage is empty";
             }
+        }
+        public IEnumerator<T> GetEnumerator()
+        {
+            return null;
+        }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
         }
     }
 
