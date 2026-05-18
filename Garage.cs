@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using GarageBuilder.Vehicles;
@@ -13,7 +14,7 @@ namespace GarageBuilder
     {
         // fields
         // ====================================================================
-        private Vehicle[] storageSpace = Array.Empty<Vehicle>();
+        private T[] storageSpace = Array.Empty<T>();
         // private bool isFull;
         private int capacity;
 
@@ -25,7 +26,7 @@ namespace GarageBuilder
 
         // properties
         // ====================================================================
-        private Vehicle[] StorageSpace
+        private T[] StorageSpace
         {
             get {return storageSpace;}
             set
@@ -57,7 +58,7 @@ namespace GarageBuilder
         }
         // methods
         // ====================================================================
-        public void AddVehicle(Vehicle v)
+        public void AddVehicle(T v)
         {
             // Console.WriteLine($"capacity: {capacity} VehicleCount: {VehicleCount}");
             if (VehicleCount >= Capacity)
@@ -83,7 +84,7 @@ namespace GarageBuilder
 
         private bool IdExists(string id)
         {
-            foreach (Vehicle current in storageSpace)
+            foreach (T current in storageSpace)
             {
                 try
                 {
@@ -122,7 +123,7 @@ namespace GarageBuilder
             return;
         }
 
-        private void modifyVehicleCounter(Vehicle v, int modifier)
+        private void modifyVehicleCounter(T v, int modifier)
         {
             if(modifier != -1 && modifier != 1)
             {
@@ -152,15 +153,15 @@ namespace GarageBuilder
         }
 
 
-        public Vehicle[] FindVehicle(string type = "", string id = "", string colour = "", int weight = 0)
+        public T[] FindVehicle(string type = "", string id = "", string colour = "", int weight = 0)
         {
             if(type == "" && id == "" && colour == "" && weight == 0)
             {
                 return [];
             }
-            Vehicle[] foundVehicles = new Vehicle[VehicleCount];
+            T[] foundVehicles = new T[VehicleCount];
             int counter = 0;
-            foreach (Vehicle current in StorageSpace)
+            foreach (T current in StorageSpace)
             {
                 if(current == null)
                 {
@@ -190,7 +191,7 @@ namespace GarageBuilder
             }
 
             
-            Vehicle[] returnArray = new Vehicle[counter];
+            T[] returnArray = new T[counter];
             Array.Copy(foundVehicles, returnArray, counter);
             return returnArray;            
         }
@@ -250,7 +251,7 @@ namespace GarageBuilder
         }
         public IEnumerator<T> GetEnumerator()
         {
-            return null;
+            return StorageSpace.OfType<T>().GetEnumerator();
         }
         IEnumerator IEnumerable.GetEnumerator()
         {

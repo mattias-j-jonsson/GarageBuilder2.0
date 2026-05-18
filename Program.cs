@@ -15,8 +15,8 @@ namespace GarageBuilder
             if (loadedQuestion)
             {
                 string pathToFile = Environment.CurrentDirectory;
-                pathToFile = pathToFile.Substring(pathToFile.IndexOf("GarageBuilder"));
-                pathToFile = Path.GetRelativePath(pathToFile, "GarageBuilder/Data/vehicles.txt");
+                pathToFile = pathToFile.Substring(pathToFile.IndexOf("GarageBuilder2.0"));
+                pathToFile = Path.GetRelativePath(pathToFile, "GarageBuilder2.0/Data/vehicles.txt");
                 List<Vehicle> fileInput = MenuSystem.LoadVehiclesFromFile(pathToFile);
                 foreach (var item in fileInput)
                 {
@@ -27,6 +27,11 @@ namespace GarageBuilder
             bool running = true;
             while(running)
             {
+                foreach (var item in garage)
+                {
+                    Console.WriteLine(item);
+                }
+                Console.Read();
                 string[] menuOptions = ["Add vehicle", "Remove vehicle", "Find vehicle", "Print all vehicles", "Print type", "Quit"];
                 string menuChoice = MenuSystem.MainMenu(menuOptions);
                 switch (menuChoice)
