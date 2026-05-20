@@ -14,7 +14,6 @@ namespace GarageBuilder
     {
         // fields
         // ====================================================================
-        private string name;
         private T[] storageSpace = Array.Empty<T>();
         // private bool isFull;
         private int capacity;
@@ -27,7 +26,11 @@ namespace GarageBuilder
 
         // properties
         // ====================================================================
-        public string Name {get; private set;}
+        public string Name 
+        {
+            get;
+            private set => field = value.Length <= 50 && value.Length > 0 ? value : throw new ArgumentException("Name of garage cannot be longer than 50 characters");
+        }
         private T[] StorageSpace
         {
             get {return storageSpace;}
@@ -53,10 +56,11 @@ namespace GarageBuilder
         }
         // constructors
         // ====================================================================
-        public Garage(int capacity)
+        public Garage(string name, int capacity)
         {
             StorageSpace = new T[capacity];
             this.Capacity = capacity;
+            this.Name = name;
         }
         // methods
         // ====================================================================
