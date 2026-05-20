@@ -1,3 +1,5 @@
+using GarageBuilder.UI;
+
 namespace GarageBuilder
 {
     internal class Manager

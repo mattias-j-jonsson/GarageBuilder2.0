@@ -27,11 +27,6 @@ namespace GarageBuilder
             bool running = true;
             while(running)
             {
-                foreach (var item in garage)
-                {
-                    Console.WriteLine(item);
-                }
-                Console.Read();
                 string[] menuOptions = ["Add vehicle", "Remove vehicle", "Find vehicle", "Print all vehicles", "Print type", "Quit"];
                 string menuChoice = MenuSystem.MainMenu(menuOptions);
                 switch (menuChoice)
