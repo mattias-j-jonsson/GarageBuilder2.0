@@ -10,10 +10,11 @@ using GarageBuilder.Vehicles;
 
 namespace GarageBuilder
 {
-    internal class Garage<T>:IEnumerable<T> where T : Vehicle
+    internal class Garage<T> : IGarage<T> where T : Vehicle
     {
         // fields
         // ====================================================================
+        private string name;
         private T[] storageSpace = Array.Empty<T>();
         // private bool isFull;
         private int capacity;
@@ -26,6 +27,7 @@ namespace GarageBuilder
 
         // properties
         // ====================================================================
+        public string Name {get; private set;}
         private T[] StorageSpace
         {
             get {return storageSpace;}

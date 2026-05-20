@@ -5,14 +5,13 @@ using GarageBuilder.Vehicles;
 
 namespace GarageBuilder
 {
-    internal class Manager
+    internal static class Manager
     {
-        private List<IGarage> allGarages = new List<Garage<T>>();
+        private static List<IGarage> garageList = new List<IGarage>();
         
-        public void runApp(IUserInterface userIf)
+        public static void runApp(IUserInterface userIf)
         {
             userIf = new UserInterface();
-            
         }
     }
 }
