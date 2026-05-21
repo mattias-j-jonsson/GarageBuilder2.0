@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 
 namespace GarageBuilder.Vehicles
@@ -26,10 +27,26 @@ namespace GarageBuilder.Vehicles
         public override int propertyLengthIndividualProp2 => PassengerCapacity.ToString().Length + "Passenger capacity".Length;
         // constructors
         // ====================================================================
-        public Bus(string id, string colour, int weight, bool electric, int passengerCapacity) : base(id, colour, weight)
+        public Bus(string id, string colour, string weight, string electric, string passengerCapacity) : base(id, colour, weight)
         {
-            this.Electric = electric;
-            this.PassengerCapacity = passengerCapacity;
+            bool parseSuccess = bool.TryParse(electric, out bool boolElectric);
+            if (parseSuccess)
+            {
+                this.Electric = boolElectric;
+            }
+            else
+            {
+                throw new ArgumentException("Parsing error.", nameof(electric));
+            }
+            parseSuccess = int.TryParse(passengerCapacity, out int intPassengerCapacity);
+            if (parseSuccess)
+            {
+                this.PassengerCapacity = intPassengerCapacity;
+            }
+            else
+            {
+                throw new ArgumentException("Parsing error.", nameof(passengerCapacity));
+            }
         }
         // methods
         // ====================================================================

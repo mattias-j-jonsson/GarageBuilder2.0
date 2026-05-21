@@ -4,13 +4,13 @@ namespace GarageBuilder.UI
 {
     internal class UserInterface : IUserInterface
     {
-        public (string type, string id, string colour, int weight, string[] additionalAttributes) AddVehicleMenu()
+        public (string type, string id, string colour, string weight, string[] additionalAttributes) AddVehicleMenu()
         {
             string[] menuOptions = ["Airplane", "Boat", "Bus", "Car", "Motorcycle"];
             string vehicleType = MultipleChoiceMenu(menuOptions, "What kind of vehicle do you want to add?");
             string id = InputMenu("What id does the vehicle have?", "Input (on the form \"ABC123\")");
             string colour = InputMenu("What coulour is the vehicle?");
-            bool parseSuccess = int.TryParse(InputMenu("What is its weight?"), out int weight);
+            string weight = InputMenu("What is its weight?");
             switch (vehicleType)
             {
                 case "Airplane":
@@ -37,7 +37,7 @@ namespace GarageBuilder.UI
                 default:
                     break;
             }
-            return ("", "", "", 0, []);
+            return ("", "", "", "", []);
         }
         public string RemoveVehicleMenu(string[] vehicles)
         {

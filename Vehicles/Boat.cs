@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 
 namespace GarageBuilder.Vehicles
@@ -19,9 +20,25 @@ namespace GarageBuilder.Vehicles
         public override int propertyLengthIndividualProp1 => BoatType.ToString().Length + "Boat type".Length;
         // constructors
         // ====================================================================
-        public Boat(string id, string colour, int weight, Type boatType) : base(id, colour, weight)
+        public Boat(string id, string colour, string weight, string boatType) : base(id, colour, weight)
         {
-            this.BoatType = boatType;
+            boatType = boatType.ToUpper();
+            if(boatType == "OUTBOARDER")
+            {
+                this.BoatType = Type.outboarder;
+            }
+            else if(boatType == "INBOARDER")
+            {
+                this.BoatType = Type.inboarder;
+            }
+            else if(boatType == "SAILBOAT")
+            {
+                this.BoatType = Type.sailboat;
+            }
+            else
+            {
+                throw new ArgumentException("Boat type not accepted.");
+            }
         }
         // methods
         // ====================================================================

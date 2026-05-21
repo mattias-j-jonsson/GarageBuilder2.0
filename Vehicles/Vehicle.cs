@@ -72,11 +72,20 @@ namespace GarageBuilder.Vehicles
 
         // constructors
         // ====================================================================
-        public Vehicle(string id, string colour, int weight)
+        public Vehicle(string id, string colour, string weight)
         {
             this.Id = id.ToUpper();
             this.Colour = colour.ToUpper();
-            this.Weight = weight;
+            
+            bool parseSuccess = int.TryParse(weight, out int intWeight);
+            if(parseSuccess)
+            {
+                this.Weight = intWeight;
+            }
+            else
+            {
+                throw new ArgumentException("Parsing error.", nameof(weight));
+            }
         }
         // methods
         // ====================================================================

@@ -64,16 +64,39 @@ namespace GarageBuilder
         }
         // methods
         // ====================================================================
-        public void AddVehicle(T v)
+        // public void AddVehicle(T v)
+        // {
+        //     // Console.WriteLine($"capacity: {capacity} VehicleCount: {VehicleCount}");
+        //     if (VehicleCount >= Capacity)
+        //     {
+        //         Console.WriteLine("The garage has reached its limit. Please remove vehicles to free up space");
+        //         Console.Read();
+        //     } else if (IdExists(v.Id) == true)
+        //     {
+        //         Console.WriteLine($"ID {v.Id} already exists. Duplicate ID's are NOT allowed.");
+        //         Console.Read();
+        //     }
+        //     else
+        //     {
+        //         int index = 0;
+        //         while (StorageSpace[index] != null)
+        //         {
+        //             index++;
+        //         }
+        //         storageSpace[index] = v; // should copy rather than put input reference?
+        //         modifyVehicleCounter(v, 1);
+        //     }
+        // }
+        public void AddVehicle(string type, string id, string colour, string weight, string[] additionalAttributes)
         {
             // Console.WriteLine($"capacity: {capacity} VehicleCount: {VehicleCount}");
             if (VehicleCount >= Capacity)
             {
                 Console.WriteLine("The garage has reached its limit. Please remove vehicles to free up space");
                 Console.Read();
-            } else if (IdExists(v.Id) == true)
+            } else if (IdExists(id) == true)
             {
-                Console.WriteLine($"ID {v.Id} already exists. Duplicate ID's are NOT allowed.");
+                Console.WriteLine($"ID {id} already exists. Duplicate ID's are NOT allowed.");
                 Console.Read();
             }
             else
@@ -83,8 +106,29 @@ namespace GarageBuilder
                 {
                     index++;
                 }
-                storageSpace[index] = v; // should copy rather than put input reference?
-                modifyVehicleCounter(v, 1);
+                Vehicle v;
+                switch (type.ToUpper())
+                {
+                    case "AIRPLANE":
+                        v = new Airplane(id, colour, weight, additionalAttributes[0], additionalAttributes[1]);
+                        break;
+                    case "BOAT":
+                        v = new Boat(id, colour, weight, additionalAttributes[0]);
+                        break;
+                    case "BUS":
+                        v = new Bus(id, colour, weight, additionalAttributes[0], additionalAttributes[1]);
+                        break;
+                    case "CAR":
+                        v = new Car(id, colour, weight, additionalAttributes[0], additionalAttributes[1]);
+                        break;
+                    case "MOTORCYCLE":
+                        v = new Motorcycle(id, colour, weight, additionalAttributes[0], additionalAttributes[1]);
+                        break;
+                    default:
+                        throw new Exception("Vehicle was not valid. Operation aborted");
+                }
+                storageSpace[index] = (T) v; // should copy rather than put input reference?
+                modifyVehicleCounter((T)v, 1);
             }
         }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 
 namespace GarageBuilder.Vehicles
@@ -28,10 +29,26 @@ namespace GarageBuilder.Vehicles
 
         // constructors
         // ====================================================================
-        public Airplane(string id, string colour, int weight, int engines, int passengerCapacity) : base(id, colour, weight)
+        public Airplane(string id, string colour, string weight, string engines, string passengerCapacity) : base(id, colour, weight)
         {
-            this.NumberOfEngines = engines;
-            this.PassengerCapacity = passengerCapacity;
+            bool parseSuccess = int.TryParse(engines, out int intEngine);
+            if (parseSuccess)
+            {
+                this.NumberOfEngines = intEngine;
+            }
+            else
+            {
+                throw new ArgumentException("Parsing error.", nameof(engines));
+            }
+            parseSuccess = int.TryParse(passengerCapacity, out int intPassengerCapacity);
+            if (parseSuccess)
+            {
+                this.PassengerCapacity = intPassengerCapacity;
+            }
+            else
+            {
+                throw new ArgumentException("Parsing error.", nameof(passengerCapacity));
+            }
         }
         // methods
         // ====================================================================

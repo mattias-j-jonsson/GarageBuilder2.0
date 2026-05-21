@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 
 namespace GarageBuilder.Vehicles
@@ -26,10 +27,34 @@ namespace GarageBuilder.Vehicles
         public override int propertyLengthIndividualProp2 => CylinderVolume.ToString().Length + "Cylinder volume".Length;
         // constructors
         // ====================================================================
-        public Motorcycle(string id, string colour, int weight, WeightClass weightclass, int cylinderVolume) : base(id, colour, weight)
+        public Motorcycle(string id, string colour, string weight, string weightclass, string cylinderVolume) : base(id, colour, weight)
         {
-            this.Weightclass = weightclass;
-            this.CylinderVolume = cylinderVolume;
+            weightclass = weightclass.ToUpper();
+            if(weightclass == WeightClass.lightweight.ToString().ToUpper())
+            {
+                this.Weightclass = WeightClass.lightweight;
+            }
+            else if(weightclass == WeightClass.mediumweight.ToString().ToUpper())
+            {
+                this.Weightclass = WeightClass.mediumweight;
+            }
+            else if(weightclass == WeightClass.heavyweight.ToString().ToUpper())
+            {
+                this.Weightclass = WeightClass.heavyweight;
+            }
+            else
+            {
+                throw new ArgumentException("Weight class not accepted.");
+            }
+            bool parseSuccess = int.TryParse(cylinderVolume, out int intCylinderVolume);
+            if(parseSuccess)
+            {
+                this.CylinderVolume = intCylinderVolume;
+            }
+            else
+            {
+                throw new ArgumentException("Parsing error.", nameof(cylinderVolume));
+            }
         }
         // methods
         // ====================================================================

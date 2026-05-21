@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 
 namespace GarageBuilder.Vehicles
@@ -27,10 +28,26 @@ namespace GarageBuilder.Vehicles
         public override int propertyLengthIndividualProp2 => Electric.ToString().Length + "Electric".Length;
         // constructors
         // ====================================================================
-        public Car(string id, string colour, int weight, bool fourWheelDrive, bool electric) : base(id, colour, weight)
+        public Car(string id, string colour, string weight, string fourWheelDrive, string electric) : base(id, colour, weight)
         {
-            this.FourWheelDrive = fourWheelDrive;
-            this.Electric = electric;
+            bool parseSuccess = bool.TryParse(electric, out bool boolElectric);
+            if (parseSuccess)
+            {
+                this.Electric = boolElectric;
+            }
+            else
+            {
+                throw new ArgumentException("Parsing error.", nameof(electric));
+            }
+            parseSuccess = bool.TryParse(fourWheelDrive, out bool boolFourWheelDrive);
+            if (parseSuccess)
+            {
+                this.FourWheelDrive = boolFourWheelDrive;
+            }
+            else
+            {
+                throw new ArgumentException("Parsing error.", nameof(fourWheelDrive));
+            }
         }
         // methods
         // ====================================================================
