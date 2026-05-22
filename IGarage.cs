@@ -9,6 +9,7 @@ namespace GarageBuilder
         public void AddVehicle(string type, string id, string colour, string weight, string[] additionalAttributes);
         public void RemoveVehicle(int index); // borde vara vehicle:id!?
         public T[] FindVehicle(string type, string id, string coulour, int weight);
+        public string GetStatusString();
 
     }
 

@@ -299,6 +299,12 @@ namespace GarageBuilder
                 return "Garage is empty";
             }
         }
+
+        public string GetStatusString()
+        {
+            return $"{Name} {VehicleCount}/{Capacity}";
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             return StorageSpace.OfType<T>().GetEnumerator();

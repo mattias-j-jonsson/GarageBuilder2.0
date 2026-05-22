@@ -6,6 +6,6 @@ namespace GarageBuilder.UI
         public string MultipleChoiceMenu(string[] menuOptions, string optionalMessage);
         public string InputMenu(string primaryMessage, string optionalMessage = "");
         public string RemoveVehicleMenu(string[] vehicles);
-        public (string type, string id, string colour, int weight, string[] additionalAttributes) AddVehicleMenu();
+        public (string type, string id, string colour, string weight, string[] additionalAttributes) AddVehicleMenu();
     }
 }
